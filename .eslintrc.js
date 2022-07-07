@@ -23,6 +23,7 @@ module.exports = {
     "no-prototype-builtins": "off",
     "no-void": "off",
     quotes: ["error", "double", { avoidEscape: true }],
+    "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     semi: ["error", "always"],
     "space-before-function-paren": [

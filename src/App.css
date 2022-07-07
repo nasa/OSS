@@ -28,11 +28,40 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.div--columns {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  min-height: 80vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.div--columns>section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.flex-basis--25pct {
+  flex-basis: 25%;
+}
+
+.flex-basis--75pct {
+  flex-basis: 75%;
+}
+
+.justify--center {
+  justify-content: center;
+}
+
+.justify--start {
+  justify-content: flex-start;
+}
+
+.ms-Viewport {
+  width: 100%;
 }

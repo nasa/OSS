@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { sp } from "@pnp/sp";
+import GroupList from "../../components/GroupList";
 
 const Dashboard = () =>
 {
@@ -10,9 +11,14 @@ const Dashboard = () =>
     readGroups();
   };
   useEffect(getAllGroups, []);
-  return (<>
-    {Array.isArray(infoGroups) ? `Groups retrieved: ${infoGroups.length}` : (<div >Retrieving groups&hellip;</div>)}
-  </>);
+  return (<div className="div--columns" style={{ maxHeight: "85vh" }}>
+    <section className="flex-basis--25pct">
+      <GroupList groups={infoGroups} />
+    </section>
+    <section className="flex-basis--75pct">
+      <div style={{ textAlign: "center" }}>Select a group on the left to view its information here.</div>
+    </section>
+  </div>);
 };
 Dashboard.displayName = "Dashboard";
 
