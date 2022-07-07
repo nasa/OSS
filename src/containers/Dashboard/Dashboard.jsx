@@ -16,7 +16,9 @@ const Dashboard = () =>
       <GroupList groups={infoGroups} />
     </section>
     <section className="flex-basis--75pct">
-      <div style={{ textAlign: "center" }}>Select a group on the left to view its information here.</div>
+      <div className="display--flex" style={{ height: "100%", textAlign: "center" }}>
+        Select a group on the left to view its information here.
+      </div>
     </section>
   </div>);
 };

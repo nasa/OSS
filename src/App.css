@@ -28,6 +28,12 @@
   color: #61dafb;
 }
 
+.display--flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .div--columns {
   display: flex;
   flex: 0 0 auto;
@@ -39,9 +45,6 @@
 
 .div--columns>section {
   align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   max-height: 100vh;
   overflow-y: auto;
 }
