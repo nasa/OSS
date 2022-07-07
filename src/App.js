@@ -19,8 +19,8 @@ function App()
         >
           Learn React
         </a>
+        <div><Dashboard /></div>
       </header>
-      <div><Dashboard /></div>
     </div>
   );
 }

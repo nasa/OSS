@@ -1,0 +1,24 @@
+{
+  "deploy.reloaded": {
+    "packages": [
+      {
+        "description": "React Distro",
+        "files": [
+          "build/**/*"
+        ],
+        "name": "Distro"
+      }
+    ],
+    "targets": [
+      {
+        "description": "IMOC Site",
+        "dir": "\\\\fod1.sp.jsc.nasa.gov@ssl\\FOD\\IMOC2\\Projects\\IMIS_Project\\dev\\Paul\\SiteAssets\\",
+        "mappings": {
+          "/build/**": "/group-mgmt/"
+        },
+        "name": "IMOC",
+        "type": "local"
+      }
+    ]
+  }
+}

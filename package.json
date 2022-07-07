@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build:imoc": "env-cmd -f .env.imoc react-scripts build -- --profile",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -26,7 +26,7 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
+      ">0.2% or ie 11",
       "not dead",
       "not op_mini all"
     ],
@@ -37,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "eslint": "^8.19.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
