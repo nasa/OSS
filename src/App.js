@@ -1,7 +1,7 @@
 import "./App.css";
 import Dashboard from "./containers/Dashboard";
 
-function App()
+const App = () =>
 {
   return (
     <div className="App">
@@ -10,6 +10,7 @@ function App()
       </main>
     </div>
   );
-}
+};
+App.displayName = "App";
 
 export default App;

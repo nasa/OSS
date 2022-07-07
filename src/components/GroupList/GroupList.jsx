@@ -1,7 +1,7 @@
 import * as FluentUI from "@fluentui/react";
 import { useMemo } from "react";
 
-const GroupList = ({ groups = [] } = {}) =>
+const GroupList = ({ groups = [], onActiveItemChanged } = {}) =>
 {
   const columns = useMemo(
     () => ([
@@ -32,6 +32,7 @@ const GroupList = ({ groups = [] } = {}) =>
           data-is-scrollable={true}
           items={groups}
           layoutMode={FluentUI.DetailsListLayoutMode.justified}
+          onActiveItemChanged={onActiveItemChanged}
           selectionMode={FluentUI.SelectionMode.single}
           setKey="Id" />
       </div>)
