@@ -1,5 +1,7 @@
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
+import "@pnp/polyfill-ie11";
+import { sp } from "@pnp/sp";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
@@ -7,6 +9,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+sp.setup({
+  ie11: true,
+  sp: { baseUrl: process.env.REACT_APP_WEB_REL_URL }
+});
 root.render(
   <React.StrictMode>
     <App />

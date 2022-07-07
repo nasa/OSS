@@ -21,6 +21,7 @@ module.exports = {
     "brace-style": ["error", "allman"],
     camelcase: ["error", { allow: ["^on", "^promise_", "_(done|fail)$"], ignoreGlobals: true }],
     "no-prototype-builtins": "off",
+    "no-void": "off",
     quotes: ["error", "double", { avoidEscape: true }],
     "react/react-in-jsx-scope": "off",
     semi: ["error", "always"],
