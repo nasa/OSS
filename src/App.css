@@ -1,3 +1,7 @@
+button {
+  min-width: unset;
+}
+
 label {
   text-align: left;
 }

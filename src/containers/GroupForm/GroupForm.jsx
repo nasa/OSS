@@ -31,7 +31,7 @@ const GroupForm = ({ group = null } = {}) =>
             <GroupFormFields />
           </GroupContext.Provider>
         </div>)
-      : (<div className="div--group-form justify--center">
+      : (<div className="div--group-form justify--center" style={{ height: "100%" }}>
         <div style={{ textAlign: "center" }}>Select a group on the left to view its information here.</div>
       </div>)
     }
