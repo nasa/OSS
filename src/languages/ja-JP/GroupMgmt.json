@@ -1,0 +1,35 @@
+{
+  "translations": {
+    "GroupForm": {
+      "choicesEditMembership": {
+        "false": "管理者",
+        "true": "このグループのメンバー"
+      },
+      "choicesViewMembership": {
+        "false": "みんな",
+        "true": "このグループのメンバー"
+      },
+      "choicesYesNo": {
+        "false": "いいえ",
+        "true": "はい"
+      },
+      "labels": {
+        "AllowMembersEditMembership": "誰がこのグループから人々を入れることか追い出すことができますか？",
+        "AllowRequestToJoinLeave": "グループには人々が参加か脱退のリクエストをできますか？",
+        "AutoAcceptRequestToJoinLeave": "参加か退会のリクエストを自動的に承認しますか？",
+        "Description": "説明",
+        "OnlyAllowMembersViewMembership": "誰がこのグループの人々を特定できますか？",
+        "OwnerTitle": "管理者",
+        "Title": "グループ名"
+      },
+      "placeholder": "ここに情報を表示するのに左側のグループを選択します。"
+    },
+    "GroupList": {
+      "columns": {
+        "Id": "ID",
+        "Title": "グループ名"
+      },
+      "retrieving": "グループの取得中…"
+    }
+  }
+}

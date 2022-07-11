@@ -1,0 +1,35 @@
+{
+  "translations": {
+    "GroupForm": {
+      "choicesEditMembership": {
+        "false": "Owner",
+        "true": "Members of this group"
+      },
+      "choicesViewMembership": {
+        "false": "Everyone",
+        "true": "Members of this group"
+      },
+      "choicesYesNo": {
+        "false": "No",
+        "true": "Yes"
+      },
+      "labels": {
+        "AllowMembersEditMembership": "Who can edit membership of this group?",
+        "AllowRequestToJoinLeave": "Allow requests to join/leave the group?",
+        "AutoAcceptRequestToJoinLeave": "Auto-accept requests to join/leave the group?",
+        "Description": "Description",
+        "OnlyAllowMembersViewMembership": "Who can view membership of this group?",
+        "OwnerTitle": "Owner",
+        "Title": "Title"
+      },
+      "placeholder": "Select a group on the left to view its information here."
+    },
+    "GroupList": {
+      "columns": {
+        "Id": "ID",
+        "Title": "Group Name"
+      },
+      "retrieving": "Retrieving groups…"
+    }
+  }
+}

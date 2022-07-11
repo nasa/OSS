@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import * as FluentUI from "@fluentui/react";
 import { sp } from "@pnp/sp";
+import { useTranslation } from "react-i18next";
 import GroupFormFields from "../../components/GroupFormFields";
 import GroupContext from "../../contexts/GroupContext";
 
 const GroupForm = ({ group = null } = {}) =>
 {
+  const { t } = useTranslation();
   const [web, setWeb] = useState();
   const onMount = () =>
   {
@@ -32,7 +34,7 @@ const GroupForm = ({ group = null } = {}) =>
           </GroupContext.Provider>
         </div>)
       : (<div className="div--group-form justify--center" style={{ height: "100%" }}>
-        <div style={{ textAlign: "center" }}>Select a group on the left to view its information here.</div>
+        <div style={{ textAlign: "center" }}>{t("GroupForm.placeholder")}</div>
       </div>)
     }
   </>);
