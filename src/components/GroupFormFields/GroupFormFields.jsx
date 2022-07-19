@@ -1,13 +1,13 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
-import * as FluentUI from "@fluentui/react";
-import { Components } from "gd-sprest-react";
-import { PrincipalSource, PrincipalType, sp } from "@pnp/sp";
+import { useCallback, useContext, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import ChoiceGroup from "./ChoiceGroup";
+import PeoplePicker from "./PeoplePicker";
+import TextField from "./TextField";
 import GroupContext from "../../contexts/GroupContext";
 
 const GroupFormFields = () =>
 {
-  const { group, web } = useContext(GroupContext);
+  const { group, onChange, web } = useContext(GroupContext);
   const { t } = useTranslation();
   const choicesEditMembership = useMemo(
     () => ([
@@ -30,60 +30,72 @@ const GroupFormFields = () =>
     ]),
     [t]
   );
-  const refOwner = useRef();
-  const [valueOwner, setOwner] = useState([]);
-  const onUpdate_groupOwner = () =>
-  {
-    const updateOwner = async () =>
-    {
-      const mapSearchResultToPersona = ({ DisplayText, EntityData: { SPGroupID, SPUserID }, Key }) =>
-        ({ id: Key, itemID: SPGroupID || SPUserID, primaryText: DisplayText });
-      const searchForOwner = () => (
-        sp.profiles.clientPeoplePickerSearchUser({
-          MaximumEntitySuggestions: 15,
-          PrincipalSource: PrincipalSource.UserInfoList,
-          PrincipalType: PrincipalType.All,
-          QueryString: group.OwnerTitle
-        })
-      );
-      setOwner((await searchForOwner()).map(mapSearchResultToPersona));
-    };
-    updateOwner();
-  };
-  useEffect(onUpdate_groupOwner, [group.OwnerTitle, setOwner]);
-  const onUpdate_valueOwner = () => (void refOwner?.current?.onChange?.(valueOwner));
-  useEffect(onUpdate_valueOwner, [refOwner, valueOwner]);
+  const handleChange = useCallback(
+    (nameField) => (valueNew) => (void onChange?.({ Id: group.Id, [nameField]: valueNew })),
+    [onChange]
+  );
   return (<>
     <div className="div--group-form__row">
       <div className="div--group-form__item">
-        <label htmlFor="Title">{t("GroupForm.labels.Title")}</label>
-        <FluentUI.TextField id="Title" value={group.Title} />
+        <TextField
+          fieldName="Title"
+          key={`Title__${group.Id}`}
+          label={t("GroupForm.labels.Title")}
+          onChange={handleChange("Title")}
+          value={group.Title} />
       </div>
       <div className="div--group-form__item">
-        <label htmlFor="Description">{t("GroupForm.labels.Description")}</label>
-        <FluentUI.TextField id="Description" multiline={true} rows={4} value={group.Description} />
+        <TextField
+          fieldName="Description"
+          key={`Description__${group.Id}`}
+          label={t("GroupForm.labels.Description")}
+          onChange={handleChange("Description")}
+          value={group.Description} />
       </div>
       <div className="div--group-form__item">
-        <label htmlFor="Owner">{t("GroupForm.labels.OwnerTitle")}</label>
-        <Components.SPPeoplePicker allowGroups={true} allowMultiple={false} ref={refOwner} webUrl={web.Url} />
+        <PeoplePicker
+          allowGroups={true}
+          allowMultiple={false}
+          fieldName="OwnerTitle"
+          key={`OwnerTitle__${group.Id}`}
+          label={t("GroupForm.labels.OwnerTitle")}
+          onChange={handleChange("OwnerTitle")}
+          value={group.OwnerTitle}
+          webUrl={web.Url} />
       </div>
     </div>
     <div className="div--group-form__row">
       <div className="div--group-form__item">
-        <label>{t("GroupForm.labels.OnlyAllowMembersViewMembership")}</label>
-        <FluentUI.ChoiceGroup options={choicesViewMembership} selectedKey={group.OnlyAllowMembersViewMembership} />
+        <ChoiceGroup
+          label={t("GroupForm.labels.OnlyAllowMembersViewMembership")}
+          key={`OnlyAllowMembersViewMembership__${group.Id}`}
+          onChange={handleChange("OnlyAllowMembersViewMembership")}
+          options={choicesViewMembership}
+          value={group.OnlyAllowMembersViewMembership} />
       </div>
       <div className="div--group-form__item">
-        <label>{t("GroupForm.labels.AllowMembersEditMembership")}</label>
-        <FluentUI.ChoiceGroup options={choicesEditMembership} selectedKey={group.AllowMembersEditMembership} />
+        <ChoiceGroup
+          label={t("GroupForm.labels.AllowMembersEditMembership")}
+          key={`AllowMembersEditMembership__${group.Id}`}
+          onChange={handleChange("AllowMembersEditMembership")}
+          options={choicesEditMembership}
+          value={group.AllowMembersEditMembership} />
       </div>
       <div className="div--group-form__item">
-        <label>{t("GroupForm.labels.AllowRequestToJoinLeave")}</label>
-        <FluentUI.ChoiceGroup options={choicesYesNo} selectedKey={group.AllowRequestToJoinLeave} />
+        <ChoiceGroup
+          label={t("GroupForm.labels.AllowRequestToJoinLeave")}
+          key={`AllowRequestToJoinLeave__${group.Id}`}
+          onChange={handleChange("AllowRequestToJoinLeave")}
+          options={choicesYesNo}
+          value={group.AllowRequestToJoinLeave} />
       </div>
       <div className="div--group-form__item" style={{ display: group.AllowRequestToJoinLeave ? "" : "none" }}>
-        <label>{t("GroupForm.labels.AutoAcceptRequestToJoinLeave")}</label>
-        <FluentUI.ChoiceGroup options={choicesYesNo} selectedKey={group.AutoAcceptRequestToJoinLeave} />
+        <ChoiceGroup
+          label={t("GroupForm.labels.AutoAcceptRequestToJoinLeave")}
+          key={`AutoAcceptRequestToJoinLeave__${group.Id}`}
+          onChange={handleChange("AutoAcceptRequestToJoinLeave")}
+          options={choicesYesNo}
+          value={group.AutoAcceptRequestToJoinLeave} />
       </div>
     </div>
   </>);

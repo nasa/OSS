@@ -2,7 +2,16 @@ button {
   min-width: unset;
 }
 
-label {
+fieldset {
+  border-width: 1px;
+}
+
+input[type=text] {
+  border: none;
+}
+
+label,
+legend {
   text-align: left;
 }
 
@@ -84,6 +93,10 @@ label {
 
 .justify--center {
   justify-content: center;
+}
+
+.justify--end {
+  justify-content: flex-end;
 }
 
 .justify--start {

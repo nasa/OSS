@@ -1,6 +1,10 @@
 {
   "translations": {
     "GroupForm": {
+      "buttons": {
+        "cancel": "リセット",
+        "save": "更新を書く"
+      },
       "choicesEditMembership": {
         "false": "管理者",
         "true": "このグループのメンバー"
@@ -30,6 +34,14 @@
         "Title": "グループ名"
       },
       "retrieving": "グループの取得中…"
+    },
+    "GroupWriter": {
+      "dismiss": "閉じて",
+      "idle": "",
+      "pending": "グループ更新を書く中…",
+      "rejected": "グループ更新の書き込み中にエラーが発生しました。",
+      "resolved": "グループ更新の書き込みは成功しました。",
+      "title": "グループ更新"
     }
   }
 }

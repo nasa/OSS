@@ -1,6 +1,10 @@
 {
   "translations": {
     "GroupForm": {
+      "buttons": {
+        "cancel": "Undo Changes",
+        "save": "Save Changes"
+      },
       "choicesEditMembership": {
         "false": "Owner",
         "true": "Members of this group"
@@ -30,6 +34,14 @@
         "Title": "Group Name"
       },
       "retrieving": "Retrieving groups…"
+    },
+    "GroupWriter": {
+      "dismiss": "Dismiss",
+      "idle": "",
+      "pending": "Saving group changes…",
+      "rejected": "An error occurred while saving group changes.",
+      "resolved": "Group changes successfully saved.",
+      "title": "Save Group Changes"
     }
   }
 }

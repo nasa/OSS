@@ -23,7 +23,7 @@ const Dashboard = () =>
       <GroupList groups={infoGroups} onActiveItemChanged={onSelect} />
     </section>
     <section className="flex-basis--75pct">
-      <GroupForm group={groupSelected} />
+      <GroupForm group={groupSelected} refresh={getAllGroups} />
     </section>
   </div>);
 };
