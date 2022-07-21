@@ -66,7 +66,6 @@ const GroupList = ({ groups = [], onActiveItemChanged } = {}) =>
             prefix={(<FluentUI.Icon iconName="Search" />)}
             styles={{ field: { width: "inherit" } }}
             underlined
-            value={searchText}
             onChange={setSearchTextDebounced} />
         </div>
         <div data-is-scrollable="true" style={{ maxHeight: "80vh", overflow: "hidden auto" }}>

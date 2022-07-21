@@ -1,13 +1,17 @@
 import { useContext, useMemo, useState } from "react";
 import * as FluentUI from "@fluentui/react";
 import { useTranslation } from "react-i18next";
+import { useDebounce } from "rooks";
 import AddMemberForm from "./AddMemberForm";
 import MemberInfo from "./MemberInfo";
+import TextField from "../TextField";
 import GroupContext from "../../contexts/GroupContext";
 
 const GroupMembers = () =>
 {
   const { group, onChange } = useContext(GroupContext);
+  const [searchText, setSearchText] = useState("");
+  const setSearchTextDebounced = useDebounce(setSearchText, 500);
   const [selected, setSelected] = useState();
   const { t } = useTranslation();
   const columns = useMemo(
@@ -21,6 +25,38 @@ const GroupMembers = () =>
     ]),
     []
   );
+  const regexFilter = useMemo(
+    () =>
+    {
+      let result = null;
+      try
+      {
+        result = new RegExp(searchText, "i");
+      }
+      catch
+      {}
+      return result;
+    },
+    [searchText]
+  );
+  const filterMember = ({ Id, LoginName, Title }) =>
+  {
+    const testId = () => (/^\d+$/.test(searchText) && (Id === parseInt(searchText)));
+    const testStringValue = (value) =>
+    {
+      let result = false;
+      if (regexFilter != null)
+      {
+        result = regexFilter.test(value);
+      }
+      else
+      {
+        result = ~value.toLowerCase().indexOf(searchText.toLowerCase());
+      }
+      return result;
+    };
+    return testId() || Object.values({ LoginName, Title }).some(testStringValue);
+  };
   const filterNotSelected = ({ LoginName }) => (LoginName !== selected.LoginName);
   const onActiveItemChanged = (item) =>
     (void setSelected(group.members.filter((member) => (member.Id === item.Id))[0]));
@@ -83,12 +119,17 @@ const GroupMembers = () =>
   return (<>
     <div className="div--group-form__row">
       <div className="div--group-form__item width--double" style={{ maxHeight: "25vh", overflowY: "auto" }}>
+        <TextField
+          prefix={t("GroupMembers.labels.Search")}
+          styles={{ field: { width: "inherit" } }}
+          underlined
+          onChange={setSearchTextDebounced} />
         <FluentUI.DetailsList
           checkboxVisibility={FluentUI.CheckboxVisibility.hidden}
           columns={columns}
           compact={true}
           constrainMode={FluentUI.ConstrainMode.unconstrained}
-          items={group.members}
+          items={group.members.filter(filterMember)}
           layoutMode={FluentUI.DetailsListLayoutMode.justified}
           onActiveItemChanged={onActiveItemChanged}
           onRenderRow={onRenderRow}
