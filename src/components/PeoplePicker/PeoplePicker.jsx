@@ -2,7 +2,9 @@ import { useEffect, useRef } from "react";
 import { PrincipalSource, PrincipalType, sp } from "@pnp/sp";
 import { Components } from "gd-sprest-react";
 
-const PeoplePicker = ({ allowGroups, allowMultiple, fieldName, label, onChange, value, ...props }) =>
+const PeoplePicker = ({
+  allowGroups, allowMultiple, errorMessage, fieldName, label, onChange, required, value, ...props
+}) =>
 {
   const refPicker = useRef();
   const searchForValue = async (strValue) =>
@@ -48,8 +50,9 @@ const PeoplePicker = ({ allowGroups, allowMultiple, fieldName, label, onChange, 
     props: { ...props, onChange: handleChange }
   };
   return (<>
-    <label htmlFor={fieldName} style={{ textAlign: "left" }}>{label}</label>
+    <label className={required ? "required" : ""} htmlFor={fieldName} style={{ textAlign: "left" }}>{label}</label>
     <Components.SPPeoplePicker {...propsPicker} id={fieldName} ref={refPicker} />
+    <div className="errorMessage" role="alert" style={{ display: errorMessage ? "" : "none" }}>{errorMessage}</div>
   </>);
 };
 PeoplePicker.displayName = "PeoplePicker";

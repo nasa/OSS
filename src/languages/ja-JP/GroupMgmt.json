@@ -17,6 +17,14 @@
         "false": "いいえ",
         "true": "はい"
       },
+      "errors": {
+        "missingAutoAccept": "参加または登録解除のリクエストを自動的に承認するかしないを特定して。",
+        "missingEditMembership": "グループに人を出し入れできる人を選んで。",
+        "missingJoinLeave": "グループには人々が参加か脱退のリクエストをできるかできないを選んで。",
+        "missingOwnerTitle": "グループの管理者を特定して。",
+        "missingTitle": "グループ名を特定して。",
+        "missingViewMembership": "このグループの人々を特定できる誰を選んで。"
+      },
       "labels": {
         "AllowMembersEditMembership": "誰がこのグループから人々を入れることか追い出すことができますか？",
         "AllowRequestToJoinLeave": "グループには人々が参加か脱退のリクエストをできますか？",

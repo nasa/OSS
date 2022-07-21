@@ -7,7 +7,7 @@ import GroupContext from "../../contexts/GroupContext";
 
 const GroupFormFields = () =>
 {
-  const { group, onChange, web } = useContext(GroupContext);
+  const { group, onChange, validation, web } = useContext(GroupContext);
   const { t } = useTranslation();
   const choicesEditMembership = useMemo(
     () => ([
@@ -30,6 +30,10 @@ const GroupFormFields = () =>
     ]),
     [t]
   );
+  const getErrorMessage = useCallback(
+    (nameField) => (validation?.[nameField] ? t(`GroupForm.errors.${validation?.[nameField]}`) : ""),
+    [validation]
+  );
   const handleChange = useCallback(
     (nameField) => (valueNew) => (void onChange?.({ Id: group.Id, [nameField]: valueNew })),
     [onChange]
@@ -38,28 +42,35 @@ const GroupFormFields = () =>
     <div className="div--group-form__row">
       <div className="div--group-form__item">
         <TextField
+          errorMessage={getErrorMessage("Title")}
           fieldName="Title"
           key={`Title__${group.Id}`}
           label={t("GroupForm.labels.Title")}
           onChange={handleChange("Title")}
+          required={true}
           value={group.Title} />
       </div>
       <div className="div--group-form__item">
         <TextField
+          errorMessage={getErrorMessage("Description")}
           fieldName="Description"
           key={`Description__${group.Id}`}
           label={t("GroupForm.labels.Description")}
+          multiline={true}
           onChange={handleChange("Description")}
+          rows={4}
           value={group.Description} />
       </div>
       <div className="div--group-form__item">
         <PeoplePicker
           allowGroups={true}
           allowMultiple={false}
+          errorMessage={getErrorMessage("OwnerTitle")}
           fieldName="OwnerTitle"
           key={`OwnerTitle__${group.Id}`}
           label={t("GroupForm.labels.OwnerTitle")}
           onChange={handleChange("OwnerTitle")}
+          required={true}
           value={group.OwnerTitle}
           webUrl={web.Url} />
       </div>
@@ -67,34 +78,42 @@ const GroupFormFields = () =>
     <div className="div--group-form__row">
       <div className="div--group-form__item">
         <ChoiceGroup
+          errorMessage={getErrorMessage("OnlyAllowMembersViewMembership")}
           label={t("GroupForm.labels.OnlyAllowMembersViewMembership")}
           key={`OnlyAllowMembersViewMembership__${group.Id}`}
           onChange={handleChange("OnlyAllowMembersViewMembership")}
           options={choicesViewMembership}
+          required={true}
           value={group.OnlyAllowMembersViewMembership} />
       </div>
       <div className="div--group-form__item">
         <ChoiceGroup
+          errorMessage={getErrorMessage("AllowMembersEditMembership")}
           label={t("GroupForm.labels.AllowMembersEditMembership")}
           key={`AllowMembersEditMembership__${group.Id}`}
           onChange={handleChange("AllowMembersEditMembership")}
           options={choicesEditMembership}
+          required={true}
           value={group.AllowMembersEditMembership} />
       </div>
       <div className="div--group-form__item">
         <ChoiceGroup
+          errorMessage={getErrorMessage("AllowRequestToJoinLeave")}
           label={t("GroupForm.labels.AllowRequestToJoinLeave")}
           key={`AllowRequestToJoinLeave__${group.Id}`}
           onChange={handleChange("AllowRequestToJoinLeave")}
           options={choicesYesNo}
+          required={true}
           value={group.AllowRequestToJoinLeave} />
       </div>
       <div className="div--group-form__item" style={{ display: group.AllowRequestToJoinLeave ? "" : "none" }}>
         <ChoiceGroup
+          errorMessage={getErrorMessage("AutoAcceptRequestToJoinLeave")}
           label={t("GroupForm.labels.AutoAcceptRequestToJoinLeave")}
           key={`AutoAcceptRequestToJoinLeave__${group.Id}`}
           onChange={handleChange("AutoAcceptRequestToJoinLeave")}
           options={choicesYesNo}
+          required={true}
           value={group.AutoAcceptRequestToJoinLeave} />
       </div>
     </div>

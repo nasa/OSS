@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as FluentUI from "@fluentui/react";
 import { sp } from "@pnp/sp";
 import { useTranslation } from "react-i18next";
@@ -12,6 +12,7 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
   const { t } = useTranslation();
   const [groupEdit, setGroupEdit] = useState(groupReceived);
   const refWriter = useRef();
+  const [showErrors, setShowErrors] = useState(false);
   const [web, setWeb] = useState();
   const onMount = () =>
   {
@@ -20,7 +21,11 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
   };
   useEffect(onMount, []);
   const onChange = (groupNew) => (void setGroupEdit((groupOld) => ({ ...groupOld, ...groupNew })));
-  const onClick_save = () => (void refWriter.current.saveGroup().then(refresh));
+  const onClick_save = () =>
+  {
+    setShowErrors(true);
+    getIsValid() && refWriter.current.saveGroup().then(refresh);
+  };
   const onClick_undo = () => (void refresh?.());
   const onUpdate_groupReceived = () =>
   {
@@ -30,12 +35,54 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
       setGroupEdit({ ...groupReceived, members, __loaded: new Date() });
     };
     getGroupMembers();
+    setShowErrors(false);
   };
-  useEffect(onUpdate_groupReceived, [groupReceived, setGroupEdit]);
+  useEffect(onUpdate_groupReceived, [groupReceived, setGroupEdit, setShowErrors]);
+  const getValidation = () =>
+  {
+    const isNotEmpty = (nameField) => () => ((groupEdit?.[nameField] || "").trim() !== "");
+    const isNotNull = (nameField) => () => (groupEdit?.[nameField] != null);
+    const reduceValidation = (result, { isValid, message, property }) =>
+      ({ ...(isValid() ? {} : { [property]: message }), ...result });
+    const conditions = [
+      { isValid: isNotEmpty("Title"), message: "missingTitle", property: "Title" },
+      { isValid: isNotNull("OwnerTitle"), message: "missingOwnerTitle", property: "OwnerTitle" },
+      {
+        isValid: isNotNull("OnlyAllowMembersViewMembership"),
+        message: "missingViewMembership",
+        property: "OnlyAllowMembersViewMembership"
+      },
+      {
+        isValid: isNotNull("AllowMembersEditMembership"),
+        message: "missingEditMembership",
+        property: "AllowMembersEditMembership"
+      },
+      {
+        isValid: isNotNull("AllowRequestToJoinLeave"),
+        message: "missingJoinLeave",
+        property: "AllowRequestToJoinLeave"
+      },
+      {
+        isValid: () => (!groupEdit?.AllowRequestToJoinLeave || isNotNull("AutoAcceptRequestToJoinLeave")()),
+        message: "missingAutoAccept",
+        property: "AutoAcceptRequestToJoinLeave"
+      }
+    ];
+    return conditions.reduce(reduceValidation, {});
+  };
+  const validation = useMemo(getValidation, [groupEdit]);
+  const getIsValid = useCallback(() => (Object.keys(validation).length === 0), [validation]);
+  const renderValidation = () =>
+  {
+    const renderMessage = ([key, message]) => (<div key={`alert__${key}`}>{t(`GroupForm.errors.${message}`)}</div>);
+    return (showErrors && !getIsValid())
+      ? (<div className="alert alert--danger">{Object.entries(validation).map(renderMessage)}</div>)
+      : (<></>);
+  };
   return (<>
     {groupEdit?.Id > 0
       ? (<div className="div--group-form justify--start">
-          <GroupContext.Provider value={{ group: groupEdit, onChange, web }}>
+          <GroupContext.Provider value={{ group: groupEdit, onChange, validation: showErrors ? validation : {}, web }}>
             <h1 style={{ marginBottom: "0.5em" }}>
               <a
                 href={`${web.Url}/_layouts/15/people.aspx?MembershipGroupId=${groupEdit.Id}`}
@@ -47,6 +94,7 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
                   style={{ transform: "scale(0.75)", verticalAlign: "text-top" }} />
               </a>
             </h1>
+            {renderValidation()}
             <GroupFormFields key={`form__${groupEdit.__loaded.valueOf() || 0}`} />
             <GroupMembers key={`members__${groupEdit.__loaded.valueOf() || 0}`} />
             <div className="div--group-form__row justify--end">

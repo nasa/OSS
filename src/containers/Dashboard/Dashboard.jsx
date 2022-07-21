@@ -25,7 +25,7 @@ const Dashboard = () =>
   };
   return (<div className="div--columns" style={{ maxHeight: "85vh" }}>
     <section className="flex-basis--25pct">
-      <GroupList groups={infoGroups} onActiveItemChanged={onSelect} />
+      <GroupList groups={infoGroups} onActiveItemChanged={onSelect} selection={groupSelected} />
     </section>
     <section className="flex-basis--75pct">
       <GroupForm group={groupSelected} refresh={getAllGroups} />

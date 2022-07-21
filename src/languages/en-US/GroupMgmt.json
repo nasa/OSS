@@ -17,6 +17,14 @@
         "false": "No",
         "true": "Yes"
       },
+      "errors": {
+        "missingAutoAccept": "Specify whether requests to join or leave are automatically accepted.",
+        "missingEditMembership": "Identify who is allowed to edit group membership.",
+        "missingJoinLeave": "Specify whether people can request to join or leave the group.",
+        "missingOwnerTitle": "Specify an owner for the group.",
+        "missingTitle": "Provide a title for the group.",
+        "missingViewMembership": "Specify the visibility of the group membership."
+      },
       "labels": {
         "AllowMembersEditMembership": "Who can edit membership of this group?",
         "AllowRequestToJoinLeave": "Allow requests to join/leave the group?",
