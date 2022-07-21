@@ -52,7 +52,6 @@ legend {
 .div--columns>section {
   align-items: center;
   max-height: 100vh;
-  overflow-y: auto;
 }
 
 .div--group-form {

@@ -88,7 +88,6 @@ const GroupMembers = () =>
           columns={columns}
           compact={true}
           constrainMode={FluentUI.ConstrainMode.unconstrained}
-          data-is-scrollable={true}
           items={group.members}
           layoutMode={FluentUI.DetailsListLayoutMode.justified}
           onActiveItemChanged={onActiveItemChanged}
