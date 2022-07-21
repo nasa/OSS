@@ -1,8 +1,8 @@
 import { useCallback, useContext, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import ChoiceGroup from "./ChoiceGroup";
-import PeoplePicker from "./PeoplePicker";
-import TextField from "./TextField";
+import ChoiceGroup from "../ChoiceGroup";
+import PeoplePicker from "../PeoplePicker";
+import TextField from "../TextField";
 import GroupContext from "../../contexts/GroupContext";
 
 const GroupFormFields = () =>

@@ -3,7 +3,7 @@ import { sp } from "@pnp/sp";
 import { forwardRef, useImperativeHandle, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const GroupWriter = forwardRef(({ group, members }, ref) =>
+const GroupWriter = forwardRef(({ group }, ref) =>
 {
   const [status, setStatus] = useState("idle");
   const { t } = useTranslation();
@@ -21,6 +21,16 @@ const GroupWriter = forwardRef(({ group, members }, ref) =>
     const forwardResult = (result) => () => ({ ...result, OwnerTitle: result.OwnerTitle.id });
     const onUpdate_done = () => (void setStatus("resolved"));
     const onUpdate_fail = () => (void setStatus("rejected"));
+    const updateMembership = ({ Id, members = [] }) => () =>
+    {
+      const filterByFlag = (flagName) => (member) => (member[flagName]);
+      const mapCreate = (spGroup) => ({ LoginName }) => (spGroup.users.add(LoginName));
+      const mapDelete = (spGroup) => ({ LoginName }) => (spGroup.users.removeByLoginName(LoginName));
+      const spGroup = sp.web.siteGroups.getById(Id);
+      const promisesCreate = members.filter(filterByFlag("__created")).map(mapCreate(spGroup));
+      const promisesDelete = members.filter(filterByFlag("__deleted")).map(mapDelete(spGroup));
+      return Promise.all([...promisesCreate, ...promisesDelete]);
+    };
     const updateOwner = (groupUpdated) =>
     {
       const promise_updateOwner = (resolve, reject) =>
@@ -81,6 +91,7 @@ const GroupWriter = forwardRef(({ group, members }, ref) =>
     setStatus("pending");
     const groupUpdated = await writeGroup();
     return updateOwner(groupUpdated)
+      .then(updateMembership(groupUpdated))
       .then(onUpdate_done)
       .then(forwardResult(groupUpdated))
       .catch(onUpdate_fail);

@@ -35,6 +35,22 @@
       },
       "retrieving": "グループの取得中…"
     },
+    "GroupMembers": {
+      "buttons": {
+        "add": "メンバーを追加",
+        "remove": "メンバーを削除",
+        "restore": "メンバーを復元"
+      },
+      "columns": {
+        "Title": "メンバーの名前"
+      },
+      "labels": {
+        "Email": "メールアドレス",
+        "LoginName": "ユーザー名",
+        "New": "新メンバー",
+        "Title": "メンバーの名前"
+      }
+    },
     "GroupWriter": {
       "dismiss": "閉じて",
       "idle": "",

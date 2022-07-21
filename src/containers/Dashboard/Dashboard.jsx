@@ -9,7 +9,12 @@ const Dashboard = () =>
   const [infoGroups, setGroups] = useState();
   const getAllGroups = () =>
   {
-    const readGroups = async () => (void setGroups(await sp.web.siteGroups.get()));
+    const readGroups = async () =>
+    {
+      const groupsRefreshed = await sp.web.siteGroups.get();
+      setGroups(groupsRefreshed);
+      groupSelected?.Id && setGroupSelected(groupsRefreshed.filter(({ Id }) => (Id === groupSelected.Id))[0]);
+    };
     readGroups();
   };
   useEffect(getAllGroups, []);

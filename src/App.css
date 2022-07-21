@@ -16,6 +16,7 @@ legend {
 }
 
 .App {
+  font-size: 12pt;
   text-align: center;
 }
 
@@ -44,7 +45,6 @@ legend {
   display: flex;
   flex: 0 0 auto;
   flex-direction: row;
-  min-height: 80vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -76,6 +76,10 @@ legend {
   margin-bottom: 0.5em;
   margin-right: 1em;
   min-width: 300px;
+}
+
+.div--group-form__item.width--double {
+  flex-basis: calc(50% - 1em);
 }
 
 .div--group-form__item label {

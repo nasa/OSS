@@ -35,6 +35,22 @@
       },
       "retrieving": "Retrieving groups…"
     },
+    "GroupMembers": {
+      "buttons": {
+        "add": "Add Members",
+        "remove": "Remove Member",
+        "restore": "Restore Member"
+      },
+      "columns": {
+        "Title": "Member Name"
+      },
+      "labels": {
+        "Email": "Email Address",
+        "LoginName": "Login Name",
+        "New": "New Members",
+        "Title": "Member Name"
+      }
+    },
     "GroupWriter": {
       "dismiss": "Dismiss",
       "idle": "",

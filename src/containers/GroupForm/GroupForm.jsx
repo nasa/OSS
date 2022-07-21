@@ -3,8 +3,9 @@ import * as FluentUI from "@fluentui/react";
 import { sp } from "@pnp/sp";
 import { useTranslation } from "react-i18next";
 import GroupFormFields from "../../components/GroupFormFields";
-import GroupContext from "../../contexts/GroupContext";
+import GroupMembers from "../../components/GroupMembers";
 import GroupWriter from "../../components/GroupWriter";
+import GroupContext from "../../contexts/GroupContext";
 
 const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
 {
@@ -19,13 +20,17 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
   };
   useEffect(onMount, []);
   const onChange = (groupNew) => (void setGroupEdit((groupOld) => ({ ...groupOld, ...groupNew })));
-  const onClick_save = () =>
+  const onClick_save = () => (void refWriter.current.saveGroup().then(refresh));
+  const onClick_undo = () => (void refresh?.());
+  const onUpdate_groupReceived = () =>
   {
-    const onSave_done = (groupSaved) => (void setGroupEdit({ ...groupSaved, __loaded: new Date() }));
-    refWriter.current.saveGroup().then(onSave_done).then(refresh);
+    const getGroupMembers = async () =>
+    {
+      const members = groupReceived?.Id ? await sp.web.siteGroups.getById(groupReceived.Id).users.get() : [];
+      setGroupEdit({ ...groupReceived, members, __loaded: new Date() });
+    };
+    getGroupMembers();
   };
-  const onClick_undo = () => (void setGroupEdit({ ...groupReceived, __loaded: new Date() }));
-  const onUpdate_groupReceived = () => (void setGroupEdit({ ...groupReceived, __loaded: new Date() }));
   useEffect(onUpdate_groupReceived, [groupReceived, setGroupEdit]);
   return (<>
     {groupEdit?.Id > 0
@@ -43,6 +48,7 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
               </a>
             </h1>
             <GroupFormFields key={`form__${groupEdit.__loaded.valueOf() || 0}`} />
+            <GroupMembers key={`members__${groupEdit.__loaded.valueOf() || 0}`} />
             <div className="div--group-form__row justify--end">
               <div className="div--group-form__item" style={{ textAlign: "right" }}>
                 <FluentUI.PrimaryButton text={t("GroupForm.buttons.save")} onClick={onClick_save} />

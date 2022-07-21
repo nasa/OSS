@@ -7,22 +7,32 @@ const PeoplePicker = ({ allowGroups, allowMultiple, fieldName, label, onChange, 
   const refPicker = useRef();
   const searchForValue = async (strValue) =>
   {
-    const mapSearchResultToPersona = ({ DisplayText, EntityData: { SPGroupID, SPUserID }, Key }) =>
-      ({ EntityData: { SPGroupID, SPUserID }, id: Key, itemID: SPGroupID || SPUserID, primaryText: DisplayText });
-    return (strValue
-      ? (await sp.profiles.clientPeoplePickerSearchUser({
-          MaximumEntitySuggestions: 15,
-          PrincipalSource: PrincipalSource.UserInfoList,
-          PrincipalType: allowGroups ? PrincipalType.All : PrincipalType.User,
-          QueryString: strValue
-        }))
-      : []).map(mapSearchResultToPersona);
+    const mapSearchResultToPersona = ({ DisplayText, EntityData: { Email, SPGroupID, SPUserID, Title }, Key }) =>
+      ({
+        EntityData: { SPGroupID, SPUserID },
+        id: Key,
+        itemID: SPGroupID || SPUserID,
+        primaryText: DisplayText,
+        secondaryText: Title,
+        tertiaryText: Email
+      });
+    return (
+      strValue
+        ? (await sp.profiles.clientPeoplePickerSearchUser({
+            MaximumEntitySuggestions: 15,
+            PrincipalSource: PrincipalSource.UserInfoList,
+            PrincipalType: allowGroups ? PrincipalType.All : PrincipalType.User,
+            QueryString: strValue
+          }))
+        : []
+    ).map(mapSearchResultToPersona);
   };
   const handleChange = async (results = []) =>
   {
     const mapSearch = async (result) => ((await searchForValue(result?.id))[0]);
     onChange?.(allowMultiple ? { results } : results[0]);
-    onChange?.(await (allowMultiple ? { results: results.map(mapSearch) } : mapSearch(results[0])));
+    const resultsSearch = await Promise.all(results.map(mapSearch));
+    onChange?.(allowMultiple ? { results: resultsSearch } : resultsSearch[0]);
   };
   const onRemount = () =>
   {
@@ -38,7 +48,7 @@ const PeoplePicker = ({ allowGroups, allowMultiple, fieldName, label, onChange, 
     props: { ...props, onChange: handleChange }
   };
   return (<>
-    <label htmlFor={fieldName}>{label}</label>
+    <label htmlFor={fieldName} style={{ textAlign: "left" }}>{label}</label>
     <Components.SPPeoplePicker {...propsPicker} id={fieldName} ref={refPicker} />
   </>);
 };
