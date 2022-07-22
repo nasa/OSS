@@ -4,8 +4,6 @@ import { useTranslation } from "react-i18next";
 const MemberInfo = ({ member = null, onClick_remove, onClick_restore } = {}) =>
 {
   const { t } = useTranslation();
-  const bgColorRemove = "hsla(0, 100%, 50%, 0.25)";
-  const bgColorRestore = "hsla(120, 100%, 50%, 0.25)";
   return (member != null)
     ? (<>
       <div className="div--group-form__item" style={{ textAlign: "left" }}>
@@ -24,11 +22,13 @@ const MemberInfo = ({ member = null, onClick_remove, onClick_restore } = {}) =>
       </div>
       <div style={{ textAlign: "right" }}>
         <ActionButton
-          style={{ backgroundColor: bgColorRemove, display: member.__deleted ? "none" : "" }}
+          className="background--red"
+          style={{ display: member.__deleted ? "none" : "" }}
           text={t("GroupMembers.buttons.remove")}
           onClick={onClick_remove} />
         <ActionButton
-          style={{ backgroundColor: bgColorRestore, display: member.__deleted ? "" : "none" }}
+          className="background--green"
+          style={{ display: member.__deleted ? "" : "none" }}
           text={t("GroupMembers.buttons.restore")}
           onClick={onClick_restore} />
       </div>

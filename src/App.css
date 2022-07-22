@@ -1,13 +1,24 @@
+:root {
+  --color-app-background-dark: #333333;
+  --color-app-background-light: #ffffff;
+  --color-background-green: hsla(120, 100%, 50%, 0.25);
+  --color-background-red: hsla(0, 100%, 50%, 0.25);
+  --color-error-background: rgb(255, 192, 192);
+  --color-error-text: rgb(164, 38, 44);
+}
+
 button {
   min-width: unset;
 }
 
 fieldset {
+  border-style: solid;
   border-width: 1px;
 }
 
 input[type=text] {
   border: none;
+  width: 100%;
 }
 
 label,
@@ -26,14 +37,22 @@ legend {
 }
 
 .alert--danger {
-  background-color: rgba(255, 0, 0, 0.25);
-  border-color: maroon;
-  color: maroon;
+  background-color: var(--color-error-background);
+  border-color: var(--color-error-text);
+  color: var(--color-error-text);
 }
 
 .App {
   font-size: 12pt;
   text-align: center;
+}
+
+.App.theme--dark {
+  background-color: var(--color-app-background-dark);
+}
+
+.App.theme--light {
+  background-color: var(--color-app-background-light);
 }
 
 .App-header {
@@ -49,6 +68,16 @@ legend {
 
 .App-link {
   color: #61dafb;
+}
+
+.background--green,
+button.background--green {
+  background-color: var(--color-background-green);
+}
+
+.background--red,
+button.background--red {
+  background-color: var(--color-background-red);
 }
 
 .display--flex {
@@ -108,7 +137,7 @@ legend {
   animation-fill-mode: both;
   animation-name: formField-fadeIn formField-slideDown;
   animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
-  color: rgb(164, 38, 44);
+  color: var(--color-error-text);
   display: flex;
   font-size: 12px;
   -webkit-font-smoothing: antialiased;
@@ -139,7 +168,7 @@ legend {
 
 label.required:after,
 legend.required:after {
-  color: red;
+  color: var(--color-error-text);
   content: "*";
   font-weight: bold;
   margin-left: 0.5em;

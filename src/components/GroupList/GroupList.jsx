@@ -68,7 +68,7 @@ const GroupList = ({ groups = [], onActiveItemChanged } = {}) =>
             underlined
             onChange={setSearchTextDebounced} />
         </div>
-        <div data-is-scrollable="true" style={{ maxHeight: "80vh", overflow: "hidden auto" }}>
+        <div data-is-scrollable="true" style={{ maxHeight: "87vh", overflowY: "auto" }}>
           <FluentUI.DetailsList
             checkboxVisibility={FluentUI.CheckboxVisibility.hidden}
             columns={columns}
