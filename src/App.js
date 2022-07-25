@@ -11,7 +11,7 @@ const App = () =>
   return (
     <div className={`App theme--${theme.name}`}>
       <ThemeProvider applyTo="body" theme={theme}>
-        <div className="div--columns justify--end" style={{ marginRight: "1em" }}>
+        <div className="div--columns justify--end" style={{ marginRight: "1rem" }}>
           <ThemePicker onChange={setTheme} theme={theme} />
           <LanguagePicker />
         </div>

@@ -4,6 +4,7 @@
     "GroupForm": {
       "buttons": {
         "cancel": "リセット",
+        "create": "グループを作る",
         "save": "更新を書く"
       },
       "choicesEditMembership": {

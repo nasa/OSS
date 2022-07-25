@@ -4,6 +4,7 @@
     "GroupForm": {
       "buttons": {
         "cancel": "Undo Changes",
+        "create": "New Group",
         "save": "Save Changes"
       },
       "choicesEditMembership": {

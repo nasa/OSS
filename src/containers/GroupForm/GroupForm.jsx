@@ -80,28 +80,29 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
       : (<></>);
   };
   return (<>
-    {groupEdit?.Id > 0
+    {groupEdit?.Id != null
       ? (<div className="div--group-form justify--start">
           <GroupContext.Provider value={{ group: groupEdit, onChange, validation: showErrors ? validation : {}, web }}>
-            <h1 style={{ marginBottom: "0.5em" }}>
-              <a
-                href={`${web.Url}/_layouts/15/people.aspx?MembershipGroupId=${groupEdit.Id}`}
-                rel="noreferrer"
-                target="_blank">
-                {groupReceived.Title}
-                <FluentUI.Icon
-                  iconName="OpenInNewWindow"
-                  style={{ transform: "scale(0.75)", verticalAlign: "text-top" }} />
-              </a>
-            </h1>
+            <h1 style={{ marginBottom: "0.5em" }}>{
+              groupEdit.Id > 0
+                ? (
+                <a
+                  href={`${web.Url}/_layouts/15/people.aspx?MembershipGroupId=${groupEdit.Id}`}
+                  rel="noreferrer"
+                  target="_blank">
+                  {groupReceived.Title}
+                  <FluentUI.Icon
+                    iconName="OpenInNewWindow"
+                    style={{ transform: "scale(0.75)", verticalAlign: "text-top" }} />
+                </a>)
+                : (<>[New Group]</>)
+            }</h1>
             {renderValidation()}
             <GroupFormFields key={`form__${groupEdit.__loaded.valueOf() || 0}`} />
             <GroupMembers key={`members__${groupEdit.__loaded.valueOf() || 0}`} />
-            <div className="div--group-form__row justify--end">
-              <div className="div--group-form__item" style={{ textAlign: "right" }}>
-                <FluentUI.PrimaryButton text={t("GroupForm.buttons.save")} onClick={onClick_save} />
-                <FluentUI.DefaultButton text={t("GroupForm.buttons.cancel")} onClick={onClick_undo} />
-              </div>
+            <div style={{ textAlign: "right" }}>
+              <FluentUI.PrimaryButton text={t("GroupForm.buttons.save")} onClick={onClick_save} />
+              <FluentUI.DefaultButton text={t("GroupForm.buttons.cancel")} onClick={onClick_undo} />
             </div>
             <GroupWriter group={groupEdit} ref={refWriter} />
           </GroupContext.Provider>
