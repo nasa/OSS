@@ -151,7 +151,10 @@ const GroupMembers = () =>
     </div>
     <div className="div--group-form__row" style={{ display: selected?.Id === 0 ? "none" : "" }}>
       <div className="div--group-form__item width--double" style={{ textAlign: "right" }}>
-        <FluentUI.ActionButton text={t("GroupMembers.buttons.add")} onClick={onClick_addMember} />
+        <FluentUI.ActionButton
+          style={{ height: "32px" }}
+          text={t("GroupMembers.buttons.add")}
+          onClick={onClick_addMember} />
       </div>
     </div>
   </>);

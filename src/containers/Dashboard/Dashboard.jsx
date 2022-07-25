@@ -27,7 +27,7 @@ const Dashboard = () =>
     const groupMatched = infoGroups.filter((existing) => (existing.Id === item.Id))[0];
     setGroupSelected(groupMatched);
   };
-  return (<div className="div--columns" style={{ maxHeight: "95vh" }}>
+  return (<div className="div--columns" style={{ maxHeight: "95vh", minHeight: "85vh" }}>
     <section className="flex-basis--25pct">
       <GroupList groups={infoGroups} onActiveItemChanged={onSelect} />
     </section>

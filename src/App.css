@@ -1,6 +1,6 @@
 :root {
-  --color-app-background-dark: #333333;
-  --color-app-background-light: #ffffff;
+  --color-app-background-dark: rgb(51, 51, 51);
+  --color-app-background-light: rgb(255, 255, 255);
   --color-background-green: hsla(120, 100%, 50%, 0.25);
   --color-background-red: hsla(0, 100%, 50%, 0.25);
   --color-error-background: rgb(255, 192, 192);
@@ -78,6 +78,22 @@ button.background--green {
 .background--red,
 button.background--red {
   background-color: var(--color-background-red);
+}
+
+.background--redDark,
+button.background--redDark {
+  background-color: var(--color-error-text);
+}
+
+.background--redDark:hover,
+button.background--redDark:hover {
+  background-color: var(--color-error-text);
+  filter: saturate(200%);
+}
+
+.border--redDark,
+button.border--redDark {
+  border-color: var(--color-error-text) !important;
 }
 
 .display--flex {
@@ -163,6 +179,11 @@ button.background--red {
 
 .justify--start {
   justify-content: flex-start;
+}
+
+.ms-Button--action {
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .ms-Button--action:hover {

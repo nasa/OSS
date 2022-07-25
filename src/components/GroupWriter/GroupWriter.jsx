@@ -111,7 +111,7 @@ const GroupWriter = forwardRef(({ group }, ref) =>
         {message}
       </div>
       <div style={{ display: isButtonVisible ? "" : "none", textAlign: "right" }}>
-        <ActionButton text={t("GroupWriter.dismiss")} onClick={onClick_dismiss} />
+        <ActionButton style={{ height: "32px" }} text={t("GroupWriter.dismiss")} onClick={onClick_dismiss} />
       </div>
     </Dialog>
   );

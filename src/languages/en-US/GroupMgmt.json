@@ -5,6 +5,7 @@
       "buttons": {
         "cancel": "Undo Changes",
         "create": "New Group",
+        "delete": "Delete Group",
         "save": "Save Changes"
       },
       "choicesEditMembership": {
@@ -18,6 +19,13 @@
       "choicesYesNo": {
         "false": "No",
         "true": "Yes"
+      },
+      "confirm": {
+        "delete": {
+          "cancel": "Cancel",
+          "confirm": "Delete Group",
+          "prompt": "Are you sure you want to delete the {{name}} group?"
+        }
       },
       "errors": {
         "missingAutoAccept": "Specify whether requests to join or leave are automatically accepted.",

@@ -23,12 +23,12 @@ const MemberInfo = ({ member = null, onClick_remove, onClick_restore } = {}) =>
       <div style={{ textAlign: "right" }}>
         <ActionButton
           className="background--red"
-          style={{ display: member.__deleted ? "none" : "" }}
+          style={{ display: member.__deleted ? "none" : "", height: "32px" }}
           text={t("GroupMembers.buttons.remove")}
           onClick={onClick_remove} />
         <ActionButton
           className="background--green"
-          style={{ display: member.__deleted ? "" : "none" }}
+          style={{ display: member.__deleted ? "" : "none", height: "32px" }}
           text={t("GroupMembers.buttons.restore")}
           onClick={onClick_restore} />
       </div>

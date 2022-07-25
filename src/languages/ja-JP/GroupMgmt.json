@@ -5,6 +5,7 @@
       "buttons": {
         "cancel": "リセット",
         "create": "グループを作る",
+        "delete": "グループを消す",
         "save": "更新を書く"
       },
       "choicesEditMembership": {
@@ -18,6 +19,13 @@
       "choicesYesNo": {
         "false": "いいえ",
         "true": "はい"
+      },
+      "confirm": {
+        "delete": {
+          "cancel": "キャンセル",
+          "confirm": "グループを消す",
+          "prompt": "「{{name}}」のグループを消すことを決めるしまいました？"
+        }
       },
       "errors": {
         "missingAutoAccept": "参加または登録解除のリクエストを自動的に承認するかしないを特定して。",
