@@ -77,6 +77,15 @@
       "rejected": "グループ更新の書き込み中にエラーが発生しました。",
       "resolved": "グループ更新の書き込みは成功しました。",
       "title": "グループ更新"
+    },
+    "PeoplePicker": {
+      "loadingUsers": "ユーザーの取得中…",
+      "loadingUsersAndGroups": "ユーザーとグループの取得中…",
+      "noUsersFound": "ユーザーが見つかりませんでした",
+      "noUsersOrGroupsFound": "ユーザーかグループが見つかりませんでした",
+      "searchForMore": "その他の結果を検索する",
+      "suggestedUsersHeader": "ユーザーの提案",
+      "suggestedUsersOrGroupsHeader": "ユーザーかグループの提案"
     }
   }
 }

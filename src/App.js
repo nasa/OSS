@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ThemeProvider } from "@fluentui/react-theme-provider";
+import { ThemeProvider } from "@fluentui/react";
 import Dashboard from "./containers/Dashboard";
 import LanguagePicker from "./components/LanguagePicker/LanguagePicker";
 import ThemePicker from "./components/ThemePicker";

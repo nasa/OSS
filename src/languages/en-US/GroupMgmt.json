@@ -77,6 +77,15 @@
       "rejected": "An error occurred while saving group changes.",
       "resolved": "Group changes successfully saved.",
       "title": "Save Group Changes"
+    },
+    "PeoplePicker": {
+      "loadingUsers": "Loading the users",
+      "loadingUsersAndGroups": "Loading the users and groups",
+      "noUsersFound": "No users were found",
+      "noUsersOrGroupsFound": "No users or groups were found",
+      "searchForMore": "Search for more users",
+      "suggestedUsersHeader": "Suggested users",
+      "suggestedUsersOrGroupsHeader": "Suggested users or groups"
     }
   }
 }
