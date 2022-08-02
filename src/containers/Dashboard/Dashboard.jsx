@@ -21,7 +21,7 @@ const Dashboard = () =>
     readGroups();
   };
   useEffect(getAllGroups, []);
-  const onClick_createGroup = async () => (void setGroupSelected({ Id: 0 }));
+  const onClick_createGroup = async () => (void setGroupSelected({ Id: 0, members: [] }));
   const onSelect = (item) =>
   {
     const groupMatched = infoGroups.filter((existing) => (existing.Id === item.Id))[0];

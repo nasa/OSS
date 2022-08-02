@@ -2,14 +2,23 @@
   "deploy.reloaded": {
     "packages": [
       {
-        "description": "React Distro",
+        "description": "Group Management",
         "files": [
           "build/**/*"
         ],
-        "name": "Distro"
+        "name": "Group Mgmt"
       }
     ],
     "targets": [
+      {
+        "description": "HHPC Site",
+        "dir": "\\\\hhpcls.sp.jsc.nasa.gov@SSL\\DavWWWRoot\\Sandbox\\SiteAssets\\",
+        "mappings": {
+          "/build/**": "/group-mgmt/"
+        },
+        "name": "HHPC",
+        "type": "local"
+      },
       {
         "description": "IMOC Site",
         "dir": "\\\\fod1.sp.jsc.nasa.gov@ssl\\FOD\\IMOC2\\Projects\\IMIS_Project\\dev\\Paul\\SiteAssets\\",

@@ -19,9 +19,10 @@ const PeoplePicker = ({
   const refPicker = useRef();
   const onRemount = () =>
   {
+    const forwardChange = (results) => (allowMultiple ? results : results.slice(0, 1));
     if (refPicker?.current && (typeof value === "string"))
     {
-      searchForValue(value).then(refPicker.current.onChange.bind(refPicker.current));
+      searchForValue(value).then(forwardChange).then(refPicker.current.onChange.bind(refPicker.current));
     }
   };
   useEffect(onRemount, [refPicker, value]);

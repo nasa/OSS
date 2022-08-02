@@ -21,6 +21,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "build:hhpc": "env-cmd -f .env.hhpc react-scripts build -- --profile",
     "build:imoc": "env-cmd -f .env.imoc react-scripts build -- --profile",
     "eject": "react-scripts eject",
     "start": "react-scripts start",
