@@ -22,12 +22,14 @@ const PeoplePicker = ({
     const forwardChange = (results) => (allowMultiple ? results : results.slice(0, 1));
     if (refPicker?.current && (typeof value === "string"))
     {
-      searchForValue(value).then(forwardChange).then(refPicker.current.onChange.bind(refPicker.current));
+      searchForValue()(value).then(forwardChange).then(refPicker.current.onChange.bind(refPicker.current));
     }
   };
   useEffect(onRemount, [refPicker, value]);
-  const searchForValue = async (strValue, options = {}) =>
+  const searchForValue = (options = {}) => async (strValue, selected = []) =>
   {
+    const filterNew = (result) => (!~selected.map(mapKey).indexOf(mapKey(result)));
+    const mapKey = ({ id, Key }) => (id ?? Key);
     const mapSearchResultToPersona = ({ DisplayText, EntityData: { Email, SPGroupID, SPUserID, Title }, Key }) =>
       ({
         EntityData: { SPGroupID, SPUserID },
@@ -47,13 +49,12 @@ const PeoplePicker = ({
             ...options
           }))
         : []
-    ).map(mapSearchResultToPersona);
+    ).filter(filterNew).map(mapSearchResultToPersona);
   };
-  const searchAll = (strValue) => (searchForValue(strValue, { MaximumEntitySuggestions: 5000 }));
   const getTextFromItem = ({ text }) => (text);
   const handleChange = async (results = []) =>
   {
-    const mapSearch = async (result) => ((await searchForValue(result?.id))[0]);
+    const mapSearch = async (result) => ((await searchForValue()(result?.id))[0]);
     onChange?.(allowMultiple ? { results } : results[0]);
     const resultsSearch = await Promise.all(results.map(mapSearch));
     onChange?.(allowMultiple ? { results: resultsSearch } : resultsSearch[0]);
@@ -66,8 +67,8 @@ const PeoplePicker = ({
       {...propsPicker}
       id={fieldName}
       onChange={handleChange}
-      onGetMoreResults={searchAll}
-      onResolveSuggestions={searchForValue}
+      onGetMoreResults={searchForValue({ MaximumEntitySuggestions: 5000 })}
+      onResolveSuggestions={searchForValue()}
       ref={refPicker}
       selectedItems={personas} />
     <div className="errorMessage" role="alert" style={{ display: errorMessage ? "" : "none" }}>{errorMessage}</div>
