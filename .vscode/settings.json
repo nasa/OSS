@@ -11,6 +11,15 @@
     ],
     "targets": [
       {
+        "description": "Dev-Mgmt Site",
+        "dir": "\\\\kbrcorp.sharepoint.com@SSL\\sites\\KBRMISDev-Mgmt\\SiteAssets\\",
+        "mappings": {
+          "/build/**": "/group-mgmt/"
+        },
+        "name": "Dev-Mgmt",
+        "type": "local"
+      },
+      {
         "description": "HHPC Site",
         "dir": "\\\\hhpcls.sp.jsc.nasa.gov@SSL\\DavWWWRoot\\Sandbox\\SiteAssets\\",
         "mappings": {
