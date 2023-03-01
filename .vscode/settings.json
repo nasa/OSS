@@ -11,12 +11,30 @@
     ],
     "targets": [
       {
+        "description": "Dev-CAMS Site",
+        "dir": "\\\\kbrcorp.sharepoint.com@SSL\\sites\\KBRMISDev-CAMS\\SiteAssets\\",
+        "mappings": {
+          "/build/**": "/group-mgmt/"
+        },
+        "name": "Dev-CAMS",
+        "type": "local"
+      },
+      {
         "description": "Dev-Mgmt Site",
         "dir": "\\\\kbrcorp.sharepoint.com@SSL\\sites\\KBRMISDev-Mgmt\\SiteAssets\\",
         "mappings": {
           "/build/**": "/group-mgmt/"
         },
         "name": "Dev-Mgmt",
+        "type": "local"
+      },
+      {
+        "description": "Dev-Subs Site",
+        "dir": "\\\\kbrcorp.sharepoint.com@SSL\\sites\\KBRMISDev-Subs\\SiteAssets\\",
+        "mappings": {
+          "/build/**": "/group-mgmt/"
+        },
+        "name": "Dev-Subs",
         "type": "local"
       },
       {

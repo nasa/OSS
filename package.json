@@ -21,9 +21,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "build:dev-mgmt": "env-cmd -f .env.dev-mgmt react-scripts build -- --profile",
-    "build:hhpc": "env-cmd -f .env.hhpc react-scripts build -- --profile",
-    "build:imoc": "env-cmd -f .env.imoc react-scripts build -- --profile",
+    "build:dev-cams": "env-cmd -f dev-cams.env react-scripts build -- --profile",
+    "build:dev-mgmt": "env-cmd -f dev-mgmt.env react-scripts build -- --profile",
+    "build:dev-subs": "env-cmd -f dev-subs.env react-scripts build -- --profile",
+    "build:hhpc": "env-cmd -f hhpc.env react-scripts build -- --profile",
+    "build:imoc": "env-cmd -f imoc.env react-scripts build -- --profile",
     "eject": "react-scripts eject",
     "start": "react-scripts start",
     "test": "react-scripts test"

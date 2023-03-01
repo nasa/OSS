@@ -2,6 +2,7 @@ import { ActionButton, Dialog, DialogType, Icon, Spinner, SpinnerSize } from "@f
 import { sp } from "@pnp/sp";
 import { forwardRef, useImperativeHandle, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ErrorHelper } from "../../helpers";
 
 const GroupWriter = forwardRef(({ group }, ref) =>
 {
@@ -71,6 +72,10 @@ const GroupWriter = forwardRef(({ group }, ref) =>
     const writeGroup = async () =>
     {
       const forwardRequest = ({ data }) => ({ ...group, ...data, OwnerTitle: group.OwnerTitle });
+      const writeGroup_fail = (response) =>
+      {
+        throw ErrorHelper.extractSharePointError(response.message).message.value;
+      };
       const {
         AllowMembersEditMembership, AllowRequestToJoinLeave, AutoAcceptRequestToJoinLeave, Description, Id,
         OnlyAllowMembersViewMembership, Title
@@ -85,11 +90,11 @@ const GroupWriter = forwardRef(({ group }, ref) =>
         Title
       };
       return (groupToWrite.Id > 0)
-        ? sp.web.siteGroups.getById(group.Id).update(groupToWrite).then(forwardRequest)
-        : sp.web.siteGroups.add(groupToWrite).then(forwardRequest);
+        ? sp.web.siteGroups.getById(group.Id).update(groupToWrite).then(forwardRequest).catch(writeGroup_fail)
+        : sp.web.siteGroups.add(groupToWrite).then(forwardRequest).catch(writeGroup_fail);
     };
     setStatus("pending");
-    const groupUpdated = await writeGroup();
+    const groupUpdated = await writeGroup().catch(onUpdate_fail);
     return updateOwner(groupUpdated)
       .then(updateMembership(groupUpdated))
       .then(onUpdate_done)

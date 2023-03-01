@@ -49,7 +49,7 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
       });
     };
     setShowErrors(true);
-    getIsValid() && refWriter.current.saveGroup().then(resetGroup).then(refresh);
+    getIsValid() && refWriter.current.saveGroup().then(resetGroup).finally(refresh);
   };
   const onClick_undo = () => (void refresh?.());
   const onDismiss_dialog = () => (void setHideDialog(true));
