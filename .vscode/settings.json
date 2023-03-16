@@ -38,6 +38,15 @@
         "type": "local"
       },
       {
+        "description": "GS-US-S-Ext-GEMS Site",
+        "dir": "\\\\kbrcorp.sharepoint.com@SSL\\sites\\gs-us-s-ext-gems\\Sandbox\\SiteAssets\\",
+        "mappings": {
+          "/build/**": "/group-mgmt/"
+        },
+        "name": "GS-US-S-Ext-GEMS",
+        "type": "local"
+      },
+      {
         "description": "HHPC Site",
         "dir": "\\\\hhpcls.sp.jsc.nasa.gov@SSL\\DavWWWRoot\\Sandbox\\SiteAssets\\",
         "mappings": {
