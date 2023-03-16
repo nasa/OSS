@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2015: true
   },
   extends: [
     "plugin:react/recommended",
@@ -19,8 +19,9 @@ module.exports = {
   ],
   rules: {
     "brace-style": ["error", "allman"],
-    camelcase: ["error", { allow: ["^on", "^promise_", "_(done|fail)$"], ignoreGlobals: true }],
+    camelcase: ["error", { allow: ["^on", "^promise_", "_(done|fail|internal)$"], ignoreGlobals: true }],
     "no-prototype-builtins": "off",
+    "no-var": "off",
     "no-void": "off",
     quotes: ["error", "double", { avoidEscape: true }],
     "react/prop-types": "off",
