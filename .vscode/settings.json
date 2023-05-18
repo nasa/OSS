@@ -72,6 +72,15 @@
         },
         "name": "IMOC",
         "type": "local"
+      },
+      {
+        "description": "MSOC Site",
+        "dir": "\\\\fod1.sp.jsc.nasa.gov@ssl\\FOD\\MSOC\\Org\\MyMSOC\\SiteAssets\\",
+        "mappings": {
+          "/build/**": "/group-mgmt/"
+        },
+        "name": "MSOC",
+        "type": "local"
       }
     ]
   }
