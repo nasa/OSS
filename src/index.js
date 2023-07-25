@@ -1,6 +1,3 @@
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
-import "@pnp/polyfill-ie11";
 import { initializeIcons } from "@fluentui/react";
 import { sp } from "@pnp/sp";
 import React from "react";
@@ -13,13 +10,13 @@ import reportWebVitals from "./reportWebVitals";
 
 initializeIcons();
 sp.setup({
-  ie11: true,
+  ie11: false,
   sp: { baseUrl: process.env.REACT_APP_WEB_REL_URL }
 });
 ReactDOM.render(
   <React.StrictMode>
     <I18nextProvider i18n={i18n}>
-      <App />
+      <App {...(window?.groupMgmt?.options || {})} />
     </I18nextProvider>
   </React.StrictMode>,
   document.getElementById("root")

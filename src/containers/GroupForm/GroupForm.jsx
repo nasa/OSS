@@ -1,14 +1,16 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import * as FluentUI from "@fluentui/react";
 import { sp } from "@pnp/sp";
 import { useTranslation } from "react-i18next";
 import GroupFormFields from "../../components/GroupFormFields";
 import GroupMembers from "../../components/GroupMembers";
 import GroupWriter from "../../components/GroupWriter";
+import AppContext from "../../contexts/AppContext";
 import GroupContext from "../../contexts/GroupContext";
 
 const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
 {
+  const { actions: { deleteGroup = true, updateGroup = true } } = useContext(AppContext);
   const { t } = useTranslation();
   const [disableDialog, setDisableDialog] = useState(false);
   const [groupEdit, setGroupEdit] = useState(groupReceived);
@@ -128,7 +130,7 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
             <GroupMembers key={`members__${groupEdit.__loaded.valueOf() || 0}`} />
             <div style={{ textAlign: "right" }}>
               {
-                groupEdit?.Id > 0
+                (deleteGroup && (groupEdit?.Id > 0))
                   ? (
                     <FluentUI.ActionButton
                       className="background--redDark border--redDark"
@@ -138,8 +140,14 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
                     )
                   : (<></>)
               }
-              <FluentUI.PrimaryButton text={t("GroupForm.buttons.save")} onClick={onClick_save} />
-              <FluentUI.DefaultButton text={t("GroupForm.buttons.cancel")} onClick={onClick_undo} />
+              {
+                updateGroup
+                  ? (<>
+                    <FluentUI.PrimaryButton text={t("GroupForm.buttons.save")} onClick={onClick_save} />
+                    <FluentUI.DefaultButton text={t("GroupForm.buttons.cancel")} onClick={onClick_undo} />
+                  </>)
+                  : (<></>)
+              }
             </div>
             <GroupWriter group={groupEdit} ref={refWriter} />
             <FluentUI.Dialog dialogContentProps={dialogContentProps} hidden={hideDialog} onDismiss={onDismiss_dialog}>

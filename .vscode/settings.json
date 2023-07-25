@@ -3,6 +3,7 @@
     "packages": [
       {
         "description": "Group Management",
+        "exclude": ["build/*manifest.json"],
         "files": [
           "build/**/*"
         ],
@@ -65,12 +66,21 @@
         "type": "local"
       },
       {
-        "description": "IMOC Site",
-        "dir": "\\\\fod1.sp.jsc.nasa.gov@ssl\\FOD\\IMOC2\\Projects\\IMIS_Project\\dev\\Paul\\SiteAssets\\",
+        "description": "IMOC Phase-In Site",
+        "dir": "\\\\fod1.sp.jsc.nasa.gov@ssl\\FOD\\IMOC2\\PI\\SiteAssets\\",
         "mappings": {
           "/build/**": "/group-mgmt/"
         },
-        "name": "IMOC",
+        "name": "IMOC Phase-In",
+        "type": "local"
+      },
+      {
+        "description": "IMOC SubK Site",
+        "dir": "\\\\fod1.sp.jsc.nasa.gov@ssl\\FOD\\IMOC2\\SubK\\SiteAssets\\",
+        "mappings": {
+          "/build/**": "/group-mgmt/"
+        },
+        "name": "IMOC SubK",
         "type": "local"
       },
       {

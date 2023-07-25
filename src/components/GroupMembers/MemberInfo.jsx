@@ -1,8 +1,11 @@
 import { ActionButton } from "@fluentui/react";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
+import AppContext from "../../contexts/AppContext";
 
 const MemberInfo = ({ member = null, onClick_remove, onClick_restore } = {}) =>
 {
+  const { actions: { removeMember = true } } = useContext(AppContext);
   const { t } = useTranslation();
   return (member != null)
     ? (<>
@@ -20,7 +23,7 @@ const MemberInfo = ({ member = null, onClick_remove, onClick_restore } = {}) =>
           <div className="flex-basis--75pct">{member.LoginName}</div>
         </div>
       </div>
-      <div style={{ textAlign: "right" }}>
+      <div style={{ display: removeMember ? "" : "none", textAlign: "right" }}>
         <ActionButton
           className="background--red"
           style={{ display: member.__deleted ? "none" : "", height: "32px" }}

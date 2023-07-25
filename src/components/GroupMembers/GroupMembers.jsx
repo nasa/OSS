@@ -5,10 +5,12 @@ import { useDebounce } from "rooks";
 import AddMemberForm from "./AddMemberForm";
 import MemberInfo from "./MemberInfo";
 import TextField from "../TextField";
+import AppContext from "../../contexts/AppContext";
 import GroupContext from "../../contexts/GroupContext";
 
 const GroupMembers = () =>
 {
+  const { actions: { addMember = true } } = useContext(AppContext);
   const { group, onChange } = useContext(GroupContext);
   const [searchText, setSearchText] = useState("");
   const setSearchTextDebounced = useDebounce(setSearchText, 500);
@@ -149,7 +151,7 @@ const GroupMembers = () =>
         )}
       </div>
     </div>
-    <div className="div--group-form__row" style={{ display: selected?.Id === 0 ? "none" : "" }}>
+    <div className="div--group-form__row" style={{ display: (!addMember || (selected?.Id === 0)) ? "none" : "" }}>
       <div className="div--group-form__item width--double" style={{ textAlign: "right" }}>
         <FluentUI.ActionButton
           style={{ height: "32px" }}

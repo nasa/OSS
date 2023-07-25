@@ -28,6 +28,7 @@
     "build:gs-us-s-ext-helo": "env-cmd -f gs-us-s-ext-helo.env react-scripts build -- --profile",
     "build:hhpc": "env-cmd -f hhpc.env react-scripts build -- --profile",
     "build:imoc": "env-cmd -f imoc.env react-scripts build -- --profile",
+    "build:imoc.subk": "env-cmd -f imoc.subk.env react-scripts build -- --profile",
     "build:msoc": "env-cmd -f msoc.env react-scripts build -- --profile",
     "eject": "react-scripts eject",
     "start": "react-scripts start",
@@ -35,7 +36,7 @@
   },
   "browserslist": {
     "production": [
-      ">0.2% or ie 11",
+      ">0.2%",
       "not dead",
       "not op_mini all"
     ],

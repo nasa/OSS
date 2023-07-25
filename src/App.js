@@ -3,9 +3,10 @@ import { ThemeProvider } from "@fluentui/react";
 import Dashboard from "./containers/Dashboard";
 import LanguagePicker from "./components/LanguagePicker/LanguagePicker";
 import ThemePicker from "./components/ThemePicker";
+import AppContext from "./contexts/AppContext";
 import "./App.css";
 
-const App = () =>
+const App = ({ actions = {}, filters = {} }) =>
 {
   const [theme, setTheme] = useState({});
   return (
@@ -16,7 +17,11 @@ const App = () =>
           <LanguagePicker />
         </div>
         <main>
-          <div><Dashboard /></div>
+          <div>
+            <AppContext.Provider value={{ actions, filters }}>
+              <Dashboard />
+            </AppContext.Provider>
+          </div>
         </main>
       </ThemeProvider>
     </div>
