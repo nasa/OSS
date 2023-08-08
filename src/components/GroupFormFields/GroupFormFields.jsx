@@ -74,8 +74,6 @@ const GroupFormFields = () =>
           value={group.OwnerTitle}
           webUrl={web.Url} />
       </div>
-    </div>
-    <div className="div--group-form__row">
       <div className="div--group-form__item">
         <ChoiceGroup
           errorMessage={getErrorMessage("OnlyAllowMembersViewMembership")}

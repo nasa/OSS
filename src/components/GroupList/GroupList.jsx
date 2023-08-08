@@ -81,7 +81,7 @@ const GroupList = ({ groups = [], onActiveItemChanged } = {}) =>
             setKey="Id" />
         </div>
       </div>)
-      : <div className="display--flex" style={{ height: "100%" }}>
+      : <div className="display--flex">
           <div style={{ textAlign: "center" }}>{t("GroupList.retrieving")}</div>
         </div>
   );

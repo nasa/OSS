@@ -8,7 +8,7 @@ import GroupWriter from "../../components/GroupWriter";
 import AppContext from "../../contexts/AppContext";
 import GroupContext from "../../contexts/GroupContext";
 
-const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
+const GroupForm = ({ group: groupReceived = null, refresh, web } = {}) =>
 {
   const { actions: { deleteGroup = true, updateGroup = true } } = useContext(AppContext);
   const { t } = useTranslation();
@@ -17,19 +17,12 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
   const [hideDialog, setHideDialog] = useState(true);
   const refWriter = useRef();
   const [showErrors, setShowErrors] = useState(false);
-  const [web, setWeb] = useState();
   const dialogContentProps = useMemo(() => ({
     closeButtonAriaLabel: t("GroupForm.confirm.delete.cancel"),
     subText: t("GroupForm.confirm.delete.prompt", { name: groupEdit?.Title }),
     title: t("GroupForm.buttons.delete"),
     type: FluentUI.DialogType.normal
   }), [groupEdit?.Title, t]);
-  const onMount = () =>
-  {
-    const getWeb = async () => (void setWeb(await sp.web.get()));
-    getWeb();
-  };
-  useEffect(onMount, []);
   const onChange = (groupNew) => (void setGroupEdit((groupOld) => ({ ...groupOld, ...groupNew })));
   const onClick_delete = () =>
   {
@@ -109,46 +102,12 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
   };
   return (<>
     {groupEdit?.Id != null
-      ? (<div className="div--group-form justify--start">
+      ? (<>
+        <div className="div--group-form justify--start">
           <GroupContext.Provider value={{ group: groupEdit, onChange, validation: showErrors ? validation : {}, web }}>
-            <h1 style={{ marginBottom: "0.5em" }}>{
-              groupEdit.Id > 0
-                ? (
-                <a
-                  href={`${web.Url}/_layouts/15/people.aspx?MembershipGroupId=${groupEdit.Id}`}
-                  rel="noreferrer"
-                  target="_blank">
-                  {groupReceived?.Title}
-                  <FluentUI.Icon
-                    iconName="OpenInNewWindow"
-                    style={{ transform: "scale(0.75)", verticalAlign: "text-top" }} />
-                </a>)
-                : (<>[New Group]</>)
-            }</h1>
             {renderValidation()}
             <GroupFormFields key={`form__${groupEdit.__loaded.valueOf() || 0}`} />
             <GroupMembers key={`members__${groupEdit.__loaded.valueOf() || 0}`} />
-            <div style={{ textAlign: "right" }}>
-              {
-                (deleteGroup && (groupEdit?.Id > 0))
-                  ? (
-                    <FluentUI.ActionButton
-                      className="background--redDark border--redDark"
-                      onClick={() => (void setHideDialog(false))}
-                      style={{ height: "32px", marginRight: "2rem" }}
-                      text={t("GroupForm.buttons.delete")} />
-                    )
-                  : (<></>)
-              }
-              {
-                updateGroup
-                  ? (<>
-                    <FluentUI.PrimaryButton text={t("GroupForm.buttons.save")} onClick={onClick_save} />
-                    <FluentUI.DefaultButton text={t("GroupForm.buttons.cancel")} onClick={onClick_undo} />
-                  </>)
-                  : (<></>)
-              }
-            </div>
             <GroupWriter group={groupEdit} ref={refWriter} />
             <FluentUI.Dialog dialogContentProps={dialogContentProps} hidden={hideDialog} onDismiss={onDismiss_dialog}>
               <FluentUI.DialogFooter>
@@ -163,8 +122,30 @@ const GroupForm = ({ group: groupReceived = null, refresh } = {}) =>
               </FluentUI.DialogFooter>
             </FluentUI.Dialog>
           </GroupContext.Provider>
-        </div>)
-      : (<div className="div--group-form justify--center" style={{ height: "100%" }}>
+        </div>
+        <div style={{ marginTop: "1rem", textAlign: "right", width: "100%" }}>
+          {
+            (deleteGroup && (groupEdit?.Id > 0))
+              ? (
+                <FluentUI.ActionButton
+                  className="background--redDark border--redDark"
+                  onClick={() => (void setHideDialog(false))}
+                  style={{ height: "32px", marginRight: "2rem" }}
+                  text={t("GroupForm.buttons.delete")} />
+                )
+              : (<></>)
+          }
+          {
+            updateGroup
+              ? (<>
+                <FluentUI.PrimaryButton text={t("GroupForm.buttons.save")} onClick={onClick_save} />
+                <FluentUI.DefaultButton text={t("GroupForm.buttons.cancel")} onClick={onClick_undo} />
+              </>)
+              : (<></>)
+          }
+        </div>
+      </>)
+      : (<div className="div--group-form justify--center">
         <div style={{ textAlign: "center" }}>{t("GroupForm.placeholder")}</div>
       </div>)
     }

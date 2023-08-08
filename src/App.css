@@ -96,6 +96,25 @@ button.border--redDark {
   border-color: var(--color-error-text) !important;
 }
 
+.dashboard__form {
+  align-items: flex-end;
+  display: flex;
+  flex-basis: 75%;
+  flex-direction: column;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.dashboard__form__header {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  width: 100%;
+}
+
+.dashboard__list {
+  flex-basis: 25%;
+}
+
 .display--flex {
   display: flex;
   flex-direction: column;
@@ -120,6 +139,7 @@ button.border--redDark {
   flex: 0 1 auto;
   flex-direction: column;
   flex-grow: 1;
+  overflow-y: auto;
   padding: 1rem;
 }
 
@@ -159,14 +179,6 @@ button.border--redDark {
   margin: 0px;
   padding-top: 5px;
   text-align: left;
-}
-
-.flex-basis--25pct {
-  flex-basis: 25%;
-}
-
-.flex-basis--75pct {
-  flex-basis: 75%;
 }
 
 .justify--center {
