@@ -1,6 +1,11 @@
 {
   "identification": "日本語",
   "translations": {
+    "Dashboard": {
+      "DarkTheme": "暗いテーマ",
+      "LanguagePicker": "言語を選ぶ",
+      "LightTheme": "明りテーマ"
+    },
     "GroupForm": {
       "buttons": {
         "cancel": "リセット",
@@ -68,6 +73,12 @@
         "New": "新メンバー",
         "Search": "メンバーを検索",
         "Title": "メンバーの名前"
+      },
+      "rows": {
+        "created": "追加中のメンバー",
+        "deleted": "削除中のメンバー",
+        "read": "既存のメンバー",
+        "selected": "選択したメンバー"
       }
     },
     "GroupWriter": {

@@ -1,6 +1,11 @@
 {
   "identification": "English",
   "translations": {
+    "Dashboard": {
+      "DarkTheme": "Dark theme",
+      "LanguagePicker": "Pick language",
+      "LightTheme": "Light theme"
+    },
     "GroupForm": {
       "buttons": {
         "cancel": "Undo Changes",
@@ -68,6 +73,12 @@
         "New": "New Members",
         "Search": "Search Members",
         "Title": "Member Name"
+      },
+      "rows": {
+        "created": "Member pending entry",
+        "deleted": "Member pending removal",
+        "read": "Existing member",
+        "selected": "Selected member"
       }
     },
     "GroupWriter": {

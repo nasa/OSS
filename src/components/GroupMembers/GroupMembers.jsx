@@ -83,20 +83,25 @@ const GroupMembers = () =>
     const bgColorDeleted = "hsla(0, 100%, 50%, 0.25)";
     const bgColorSelected = "hsla(0, 0%, 0%, 0.25)";
     let bgColorRow = "";
+    let statusRow = t("GroupMembers.rows.read");
     if (item.Id === selected?.Id)
     {
       bgColorRow = bgColorSelected;
+      statusRow = t("GroupMembers.rows.selected");
     }
     else if (item.__created)
     {
       bgColorRow = bgColorCreated;
+      statusRow = t("GroupMembers.rows.created");
     }
     else if (item.__deleted)
     {
       bgColorRow = bgColorDeleted;
+      statusRow = t("GroupMembers.rows.deleted");
     }
+    statusRow = `${item.Title} [${statusRow}]`;
     const stylesThisRow = { root: { backgroundColor: bgColorRow } };
-    return (<FluentUI.DetailsRow {...props} item={item} styles={stylesThisRow} />);
+    return (<FluentUI.DetailsRow {...props} aria-details={statusRow} item={item} styles={stylesThisRow} />);
   };
   const onSubmit_addMembers = (membersNew) =>
   {
@@ -124,7 +129,6 @@ const GroupMembers = () =>
         <TextField
           prefix={t("GroupMembers.labels.Search")}
           styles={{ field: { width: "inherit" } }}
-          underlined
           onChange={setSearchTextDebounced} />
         <FluentUI.DetailsList
           checkboxVisibility={FluentUI.CheckboxVisibility.hidden}
