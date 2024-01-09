@@ -26,6 +26,7 @@
     "build:dev-subs": "env-cmd -f dev-subs.env react-scripts build -- --profile",
     "build:gs-us-s-ext-gems": "env-cmd -f gs-us-s-ext-gems.env react-scripts build -- --profile",
     "build:gs-us-s-ext-helo": "env-cmd -f gs-us-s-ext-helo.env react-scripts build -- --profile",
+    "build:gs-us-s-ext-omes3": "env-cmd -f gs-us-s-ext-omes3.env react-scripts build -- --profile",
     "build:hhpc": "env-cmd -f hhpc.env react-scripts build -- --profile",
     "build:imoc": "env-cmd -f imoc.env react-scripts build -- --profile",
     "build:imoc.subk": "env-cmd -f imoc.subk.env react-scripts build -- --profile",

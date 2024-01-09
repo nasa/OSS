@@ -57,6 +57,15 @@
         "type": "local"
       },
       {
+        "description": "GS-US-S-Ext-OMES3 Site",
+        "dir": "\\\\kbrcorp.sharepoint.com@SSL\\sites\\gs-us-s-ext-OMES3\\MISProj\\SiteAssets\\",
+        "mappings": {
+          "/build/**": "/group-mgmt/"
+        },
+        "name": "GS-US-S-Ext-OMES3",
+        "type": "local"
+      },
+      {
         "description": "HHPC Site",
         "dir": "\\\\hhpcls.sp.jsc.nasa.gov@SSL\\DavWWWRoot\\Sandbox\\SiteAssets\\",
         "mappings": {
