@@ -4,6 +4,8 @@ This application provides a more intuitive interface for interacting with ShareP
 
 ## Layout
 
+ * [Contents](./docs/contents.md)
+
 ### Top
 
 The application presents the user with a theme toggle and a localization select at the top of the screen.
