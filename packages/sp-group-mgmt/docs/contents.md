@@ -1,6 +1,6 @@
 
 # Table of Contents
-* [Overview](/docs/overview.md)
+* [Overview](./overview.md)
 * API Documentation
   * components
     * ChoiceGroup
