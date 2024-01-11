@@ -1,6 +1,6 @@
 {
   "description": "SharePoint Group Management application",
-  "name": "sp-group-mgmt",
+  "name": "@nasa/sp-group-mgmt",
   "version": "0.1.0",
   "private": false,
   "dependencies": {
