@@ -1,5 +1,6 @@
 const filesys = require("fs");
 const jsdoc2md = require("jsdoc-to-markdown");
+const _ = require("lodash");
 const minimist = require("minimist");
 const path = require("path");
 
@@ -62,7 +63,12 @@ const writeOutline = (pathSource, pathDest) =>
     {
       const outlineFile = (file) =>
       {
-        const filterClass = (entry) => (~["class", "component"].indexOf(entry.kind));
+        const filterClass = (entry) =>
+        {
+          const mapTag = ({ tag }) => (tag);
+          return (entry.kind === "class") ||
+            (_.intersection((entry.customTags || []).map(mapTag), ["component", "hook"]).length);
+        };
         const mapClassWithDest = (entry) =>
         {
           const hrefPath = path.join(pathSource, file.replace(/\.[^.]+$/, ".md"))
